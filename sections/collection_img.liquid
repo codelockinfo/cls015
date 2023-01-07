@@ -1,0 +1,112 @@
+{% for block in section.blocks %}
+   
+      <div class="container" >
+          <div class="backcolor" {{section.settings.background_color }}">
+               <div class="dissflex">
+                  <div class="title1"><h2>Creat without  mess or stress</h2></div>
+                  <div clas="pos-rel">
+                       {%- assign collection = collections[block.settings.collection] -%}
+                       <div class="pos-ab" >
+                         {% for product in collection.products%} 
+                          <div style="flex: 0 0 50%;">
+                              <div class="col-img" >
+                                <a href="{{ product.url }}"><img class=imgset src="{{ product.featured_image| img_url:'medium' }}"></a>
+                                <div class="title-text">
+                                  {% for image in product.images %} 
+                                  {{product.title}}
+                                   {% endfor %}
+                                </div>
+
+                              </div>
+                          </div>
+                         
+                        {% endfor %}
+                       </div>
+                  </div>
+               </div>
+          </div>
+      </div>
+{% endfor %}
+<style>
+  .container{
+    max-width:1140px;
+    margin:0 auto;
+  }
+  .backcolor{
+        background-color: #fff1e6;
+    border-radius: 200px 200px 40px 40px;
+  }
+  .dissflex{
+    display:flex;
+    justify-content: space-between;
+  }
+  .title1{
+    flex:0 0 50%;
+    max-width:50%;
+    text-align: center;
+    padding:10% 0;
+  }
+
+  .pos-ab{
+display: flex;
+    position: relative;
+    top: 15%;
+    flex-wrap: wrap;
+
+}
+    .col-img{
+      width: 50%;
+    }
+    .imgset{
+    padding: 20px;
+    }
+  .title-text{
+  text-align: right;
+  }
+    
+</style>
+
+
+{% schema %}
+ {
+  "name": "Collection-img",
+  
+  "settings": [
+    {
+        "type": "text",
+      "id": "title",
+      "label": "collection_img"
+    }
+  ],
+  "blocks": [
+     {
+       "name": "Collection_img",
+       "type": "slide",
+       "settings": [
+         {
+           "type": "collection",
+           "id": "collection",
+           "label": "collection"
+         }
+       ]
+     }
+  ],
+  "presets": [
+    {
+      "name": "collection_img",
+      "settings": {
+        "title": "collection_img"
+      },
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

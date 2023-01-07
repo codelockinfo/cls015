@@ -1,0 +1,55 @@
+{% for block in settings.blocks %}
+   {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+
+   
+          {% for product in collection.products%} 
+              <p class="colflex1"><a href="{{ product.url}}"><img src="{{ product.featured_image | img_url: 'medium' }}" alt=""></a></p>
+               {% for image in product.images %} 
+               {% endfor %}
+          {% endfor %}
+     
+  {% endfor %}
+
+   {% schema %}
+      {
+  "name": "collection-data",
+  "tag": "section",
+  "class": "slideshow",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Slideshow"
+    }
+  ],
+  "blocks": [
+     {
+       "name": "product",
+       "type": "slide",
+       "settings": [
+         {
+           "type": "image_picker",
+           "id": "product",
+           "label": "Image"
+         }
+       ]
+     }
+  ],
+  "presets": [
+    {
+      "name": "collection-data",
+      "settings": {
+        "title": "collection-data"
+      },
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

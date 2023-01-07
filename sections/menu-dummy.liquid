@@ -1,0 +1,87 @@
+<div class="titlecls">
+ <h2> {{ section.settings.title }}</h2>
+
+  <div>
+<div class="disflex">
+  {% for block in section.blocks %}
+<div  class="fex33">
+  <div class="blockcontain">
+    {% if block.settings.kome!= blank %}
+    <a href="{{ block.settings.komurl }}"><img src="{{ block.settings.kome | img_url:'master' }}"></a>
+    {% endif %}
+    <h3>{{ block.settings.contant }}</h3>
+    <p>{{ block.settings.description }}</p>
+  </div>
+</div>
+  {% endfor %}
+  
+</div>
+    
+  </div>
+  
+</div>
+
+<style>
+
+  .disflex {
+    display: flex;
+    flex-wrap: wrap;
+}
+  .fex33 {
+    flex: 0 0 30%;
+    max-width: 30%;
+}
+</style>
+{% schema %}
+{
+  "name": "menu-dummy",
+  "tag": "section",
+  "class": "slideshow",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+
+  "blocks": [
+     {
+       "name": "Slide",
+       "type": "slide",
+       "settings": [
+         {
+           "type": "image_picker",
+           "id": "kome",
+           "label": "Image"
+         },
+          {
+      "type": "url",
+      "id": "komurl",
+      "label": "Image Url"
+    },
+          {
+      "type": "text",
+      "id": "contant",
+      "label": "Sub Text"
+    },
+      {
+      "type": "textarea",
+      "id": "description",
+      "label": "Sub Text"
+    }
+       ]
+     }
+  ],
+  "presets": [
+    {
+      "name": "menu-dummy",
+      "settings": {
+        "title": "menu-dummy"
+      }
+    }
+  ]
+ 
+}
+{% endschema %}

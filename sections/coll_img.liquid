@@ -1,0 +1,102 @@
+<div class="top">
+  {% for block in section.blocks %}
+    <div class="backimg">
+          <div class="container" >
+                <div class="title1"><h2>Why 30,000 + artists prefer viviva Colors</h2>
+                  </div>
+                    <div>
+                    {%- assign collection = collections[block.settings.collection] -%}
+                        <div class="disflex">
+                            {% for product in collection.products%} 
+                                  <div class="diswidth">
+                                  <a href="{{ product.url }}"><img class="disclass" src="{{ product.featured_image| img_url:'master' }}"></a>
+                                  </div>
+                            {% endfor %}
+                        </div>
+                   </div>
+          </div>
+      </div>
+{% endfor %}
+</div>
+<style>
+  .top{
+   margin-top: 6%;
+  }
+  .container{
+    max-width:1140px;
+    margin:0 auto;
+  }
+  .backimg{
+    background-image: url('{{ section.settings.bg-image | img_url: 'medium' }}');
+     background-size: cover;
+    background-position: center;
+        margin-top: 20px;
+  }
+  .title1{
+
+    text-align: center;
+    padding:10% 0;
+  }
+  .disflex{
+    display:flex;
+  }
+  .diswidth{
+  width:25%;
+  }
+.disclass{
+  width:100%;
+  height: 100%;
+    padding: 10px;
+}
+  
+</style>
+
+
+{% schema %} 
+ {
+  "name": "coll_img",
+  
+  "settings": [
+    {
+       
+       "type": "text",
+      "id": "title",
+      "label": "coll_img"
+    },{
+      "type": "image_picker",
+      "id": "bg-image",
+       "label": "bg-image"
+    }
+  ],
+  "blocks": [
+     {
+       "name": "coll_img",
+       "type": "slide",
+       "settings": [
+         {
+           "type": "collection",
+           "id": "collection",
+           "label": "collection"
+         }
+       ]
+     }
+  ],
+  "presets": [
+    {
+      "name": "coll_img",
+      "settings": {
+        "title": "coll_img"
+      },
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

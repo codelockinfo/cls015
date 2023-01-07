@@ -1,0 +1,84 @@
+
+
+<div class="disflex">
+  <div class="collflex">
+      {% for block in section.blocks %}
+          {%- assign collection = collections[block.settings.collection] -%}
+ 
+          {% for product in collection.products%} 
+
+             <p class="colflex1"><a href="{{ product.url}}"><img src="{{ product.featured_image | img_url: 'medium' }}" alt=""></a></p>
+                   {% for image in product.images %} 
+              
+                  {{product.title}}
+                  {{ product.price | money_without_trailing_zeros }} 
+                  {{product.description}}
+                   {% endfor %}
+           {% for variant in product.variants %}
+          <option value="{{ variant.id }}" {% if variant == current_variant %}selected="selected"{% endif %}>
+            {{ variant.title }} - {{ variant.price | money }}
+          </option>
+        {% endfor %}
+     {% endfor %}
+  
+  
+ {% endfor %}
+ </div>
+</div>
+<style>
+  .disflex{
+     display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  .collflex{
+    flex:0 0 30%;
+    max-width:30%;
+   
+}
+  .colflex1{
+    width:30%
+  }
+</style>
+ 
+ {% schema %}
+  {
+  "name": "collection_page",
+
+  "settings": [
+   
+  {
+    "id" : "SAMPLEfe",
+    "type" : "text",
+    "label" : "BUTTON Sample"
+  }
+  ],
+  "blocks":[
+  {
+  "type" : "block",
+  "name" : "block",
+  "settings" : [
+      {
+   "id": "collection",
+   "type": "collection",
+    "label": "collection"
+   }
+  ]
+  }
+
+  ],
+  "presets" : [
+  {
+    "name" : "collection_page",
+    "category" : "collection_page"
+
+    }
+  ]
+  }
+  {% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

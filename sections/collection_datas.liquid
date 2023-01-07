@@ -1,0 +1,69 @@
+{% for block in section.blocks %}
+  {%- assign collection = collections[block.settings.collection] -%}
+  <div class="disflex50">
+        {% for product in collection.products%} 
+              <a href="{{ product.url }}"><img src="{{ product.featured_image| img_url:'medium' }}"></a>
+                  
+         <div class="flex100">
+            {% for image in product.images %} 
+              
+                  {{product.title}}
+                  {{ product.price | money_without_trailing_zeros }} 
+                  {{product.description}}
+                   {% endfor %}
+         </div>
+                          {% for variant in product.variants %}
+                          <option value="{{ variant.id }}" {% if variant == current_variant %}selected="selected"{% endif %}>
+                            {{ variant.title }} - {{ variant.price | money }}
+                          </option>
+                        {% endfor %}
+           
+          {%  endfor %}
+   {% for image in product.images %} 
+        {% endfor %}
+     </div>
+{% endfor %}
+<style>
+  .disflex50{
+    display:flex;
+    width:50%;
+  }
+  .flex100{
+    width:50%;
+  }
+</style>
+{% schema %}
+{
+  "name": "collection_datas",
+  
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "collection_datas"
+    }
+  ],
+  "blocks": [
+     {
+       "name": "block",
+       "type": "block",
+       "settings": [
+         {
+           "type": "collection",
+           "id": "collection",
+           "label": "collection"
+         }
+       ]
+     }
+  ],
+  "presets": [
+    {
+      "name": "collection_datas",
+      "settings": {
+        "title": "collection_datas"
+      }
+    }
+  ]
+}
+{% endschema %}
+

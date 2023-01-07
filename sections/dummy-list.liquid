@@ -1,0 +1,98 @@
+<div>
+  {{ section.settings.title }}
+</div>
+<div class="containertext">
+  <div class="dispflex">
+  {% for block in section.blocks %}
+    <div class="flex20">
+      <div class="blockcontains">
+          {% if block.settings.komuk!= blank %}
+              <a href="{{ block.settings.komeurl }}"><img class="contantimage" src="{{ block.settings.komuk | img_url:'master' }}"></a>
+           {% endif %}
+          <div class="sub-title"><h3>{{block.settings.subcontant }}</h3></div>
+       <div class="contant"><p>{{ block.settings.pcontant }}</p></div>
+      </div>
+    </div>
+  {% endfor %}
+  </div> 
+</div>
+<style>
+  .containertext{
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 0 15px;
+  }
+  .dispflex{
+    display: flex;
+    flex-wrap: wrap;
+         }
+  .flex20{
+    flex:0 0 20%;
+    max-width:19%;
+  }
+  .contantimage{
+      width: 300px;
+    height: 400px;
+    padding:30px;
+  }
+  .sub-title{
+        text-align: center;
+  }
+  .sub-title h3{
+    color:#013d3d;
+  }
+  .contant{
+    padding: 8px;
+  }
+  .contant p{
+    color:#013d3dc2;
+  }
+</style>
+{% schema %}
+{
+  "name": "dummy-list",
+  "tag": "section",
+  "class": "slideshow",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Slideshow"
+    }
+  ],
+  "blocks": [
+     {
+       "name": "Slide",
+       "type": "slide",
+       "settings": [
+         {
+           "type": "image_picker",
+           "id": "komuk",
+           "label": "Image"
+         }, {
+           "type": "url",
+           "id": "komeurl",
+           "label": "Image Url"
+         }, {
+           "type": "text",
+           "id": "subcontant",
+           "label": "Sub Text"
+         }, {
+           "type": "textarea",
+           "id": "pcontant",
+           "label": "contant "
+         }
+       ]
+     }
+  ],
+  "presets": [
+    {
+      "name": "dummy-list",
+      "settings": {
+        "title": "dummy-list"
+      }
+    }
+  ]
+}
+{% endschema %}
